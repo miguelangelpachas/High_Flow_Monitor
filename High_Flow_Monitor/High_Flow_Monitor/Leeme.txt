@@ -1,0 +1,32 @@
+
+Plataforma: Microcontrolador ATmega328P
+
+IDE: Atmel Studio / Microchip Studio
+
+Fuente de reloj: Cristal externo de 8 MHz
+
+Voltaje de referencia del ADC: Bandgap externo de 1.25V
+
+Fusibles:
+Low(L) = 0xFF
+High(H) = 0xD1
+Extended(E) = 0xFE
+
+NOTA: Es importante configurar estos fusibles antes de descargar el programa, ya que se debe mantener los datos
+de la EEPROM y también se desea utilizar un BOR de 1.8V por seguridad.
+
+
+En esta versión del código se hizo los siguientes cambios:
+
+- Se agregó la función WDT_Off(), la cual desactiva el Watchdog Timer.
+- Se agregó la animación de una barra creciente, para indicar que la batería se está cargando.
+- Se mejoró la librería para eliminar rebotes.
+- Se agregó la función de detectar cuando el sensor de oxígeno está desconectado
+- Se agregó un menú para llevar a cabo la calibración del sensor de concentración de oxígeno.
+- En la parte final del archivo project_defines.h se encuentra la constante FIRST_TIME_PROGRAMMING. Esta constante
+  debe hacerse 1 SOLAMENTE EN LA PRIMERA PROGRAMACIÓN, luego debe definirse FIRST_TIME_PROGRAMMING como 0 y se debe
+  volver a programar el microcontrolador.
+- Los valores de los umbrales configurados para las alarmas quedan guardados en la EEPROM.
+- En caso que el microcontrolador se llegara a "colgar", el WDT generará un reset luego de 4 segundos.
+
+
